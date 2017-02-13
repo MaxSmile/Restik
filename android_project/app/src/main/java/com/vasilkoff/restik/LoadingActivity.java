@@ -120,29 +120,29 @@ public class LoadingActivity extends AppCompatActivity {
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
-        Intent intent = new Intent(context, AsymmetricListActivity.class);
-        context.startActivity(intent);
 
-//        FirebaseDatabase  database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("menu");
-//
-//        // Read from the database
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                String value = dataSnapshot.getValue().toString();
-//                Log.d(TAG, "Value is: " + value);
-//                Intent intent = new Intent(context, AsymmetricListActivity.class);
-//                context.startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//
-//            }
-//        });
+
+        FirebaseDatabase  database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("cover");
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue().toString();
+                Log.d(TAG, "Value is: " + value);
+                Intent intent = new Intent(context, AsymmetricListActivity.class);
+                intent.putExtra("cover", value);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+
+            }
+        });
     }
 
     @Override

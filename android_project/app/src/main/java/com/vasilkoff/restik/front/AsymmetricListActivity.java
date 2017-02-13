@@ -43,11 +43,9 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
 
        loadData();
 
-        listView.setRequestedColumnCount(4);
-        listView.setRequestedHorizontalSpacing(Utils.dpToPx(this, 3));
+        listView.setRequestedColumnCount(3);
+        listView.setRequestedHorizontalSpacing(Utils.dpToPx(this, 2));
         listView.setOnItemClickListener(this);
-        listView.setAllowReordering(true);
-
 
     }
 
@@ -56,9 +54,9 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
         adapter = new AsymmetricListAdapter(this,tilesList);
         AsymmetricGridViewAdapter asymmetricAdapter =
                 new AsymmetricGridViewAdapter<>(this, listView, adapter);
-
-
         listView.setAdapter(asymmetricAdapter);
+        listView.setAllowReordering(true);
+        listView.determineColumns();
     }
 
     private void addItems(ArrayList<HashMap> items) {
