@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">restik</string>
     <string name="title_categoryitem_detail">Category Item Detail</string>
-
+    <string name="front_title">Food Menu application</string>
     <string name="title_activity_loading">Food menu app template</string>
     <string name="dummy_button">Report problem</string>
     <string name="dummy_content">Loading</string>

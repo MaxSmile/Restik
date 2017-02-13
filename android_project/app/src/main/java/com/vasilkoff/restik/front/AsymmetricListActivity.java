@@ -2,13 +2,18 @@ package com.vasilkoff.restik.front;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.felipecsl.asymmetricgridview.library.Utils;
 import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
@@ -19,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.vasilkoff.restik.CategoryItemDetailActivity;
 import com.vasilkoff.restik.CategoryItemDetailFragment;
 import com.vasilkoff.restik.CategoryItemListActivity;
@@ -36,10 +43,19 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
     private final Context context = this;
     private List<TileItem> tilesList = new ArrayList<>(20);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asymmetric_list);
+
+        final CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) this.findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle( context.getString(R.string.front_title));
+            String coverUrl = getIntent().getExtras().get("cover").toString();
+            Picasso.with(context).load(coverUrl).into((ImageView) findViewById(R.id.coverImage));
+        }
+
         listView = (AsymmetricGridView) findViewById(R.id.listView);
         ViewCompat.setNestedScrollingEnabled(listView,true);
 
