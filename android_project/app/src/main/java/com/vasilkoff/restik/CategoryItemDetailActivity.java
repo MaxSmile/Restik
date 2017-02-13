@@ -55,6 +55,7 @@ public class CategoryItemDetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(CategoryItemDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(CategoryItemDetailFragment.ARG_ITEM_ID));
+
             CategoryItemDetailFragment fragment = new CategoryItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

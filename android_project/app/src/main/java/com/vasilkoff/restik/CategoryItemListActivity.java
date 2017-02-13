@@ -9,14 +9,23 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vasilkoff.restik.data.DishContent;
+import com.vasilkoff.restik.front.AsymmetricListActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +43,9 @@ public class CategoryItemListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private String CategoryId;
+    private final String TAG = this.getClass().getSimpleName();
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +55,8 @@ public class CategoryItemListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+
+        CategoryId = getIntent().getStringExtra(CategoryItemDetailFragment.ARG_ITEM_ID);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +80,42 @@ public class CategoryItemListActivity extends AppCompatActivity {
         }
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DishContent.ITEMS));
+    private void setupRecyclerView(@NonNull final RecyclerView recyclerView) {
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(CategoryId);
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Object value = dataSnapshot.getValue();
+                Log.d(TAG, "Value is: " + value.toString());
+                if (value instanceof HashMap) {
+                    HashMap<String, ArrayList> obj = (HashMap)value;
+
+                    if (obj.get("list") instanceof ArrayList) {
+                        ArrayList<HashMap> items = (ArrayList) obj.get("list");
+                        List<DishContent.DishItem> dishItems = new ArrayList<DishContent.DishItem>();
+                        for (HashMap<String, String> val : items) {
+                            dishItems.add(new DishContent.DishItem(val.get("name"), val.get("image"), "description"));
+                        }
+                        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(dishItems));
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+
+            }
+        });
+
+
     }
 
     public class SimpleItemRecyclerViewAdapter

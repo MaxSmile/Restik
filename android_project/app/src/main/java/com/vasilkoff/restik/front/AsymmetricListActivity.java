@@ -2,6 +2,8 @@ package com.vasilkoff.restik.front;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,14 +41,13 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asymmetric_list);
         listView = (AsymmetricGridView) findViewById(R.id.listView);
+        ViewCompat.setNestedScrollingEnabled(listView,true);
 
-
-       loadData();
+        loadData();
 
         listView.setRequestedColumnCount(3);
         listView.setRequestedHorizontalSpacing(Utils.dpToPx(this, 2));
         listView.setOnItemClickListener(this);
-
     }
 
     private void setAdapter() {
@@ -60,19 +61,16 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
     }
 
     private void addItems(ArrayList<HashMap> items) {
-
         for (HashMap<String,String> val : items) {
             String name = val.get("name");
             String image = val.get("image");
             if (name != null && image != null) {
                 int colSpan = Math.random() < 0.2f ? 2 : 1;
-                int rowSpan = Math.random() < 0.2f ? 2 : 1;
-                TileItem tile = new TileItem(colSpan, rowSpan,  name, image);
+                //int rowSpan = Math.random() < 0.2f ? 2 : 1;
+                TileItem tile = new TileItem(colSpan, colSpan,  name, image);
                 tilesList.add(tile);
-
             }
         }
-
         setAdapter();
     }
 
@@ -107,7 +105,7 @@ public class AsymmetricListActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(context, CategoryItemListActivity.class);
-        intent.putExtra(CategoryItemDetailFragment.ARG_ITEM_ID, tilesList.get(position));
+        intent.putExtra(CategoryItemDetailFragment.ARG_ITEM_ID, "menu/"+position);
         context.startActivity(intent);
     }
 }
