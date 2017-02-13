@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "767584354061",
+    "firebase_url": "https://restik-80541.firebaseio.com",
+    "project_id": "restik-80541",
+    "storage_bucket": "restik-80541.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767584354061:android:74d431956946ab93",
+        "android_client_info": {
+          "package_name": "com.vasilkoff.restik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767584354061-qkg2j6utnujjfab1q6jq58s6mapqe5o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vasilkoff.restik",
+            "certificate_hash": "27DF9807E019A516BAC4015D90608D5CEE99D1B8"
+          }
+        },
+        {
+          "client_id": "767584354061-06puvdi2f7r2lteg3tu4mp0u1bsmroeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg6xYd5xCrFdHc3t1aXy45ePAOn3_5bhw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767584354061-06puvdi2f7r2lteg3tu4mp0u1bsmroeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
