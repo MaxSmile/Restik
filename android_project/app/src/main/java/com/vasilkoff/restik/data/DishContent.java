@@ -1,4 +1,4 @@
-package com.vasilkoff.restik.dummy;
+package com.vasilkoff.restik.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,22 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- * <p>
- * TODO: Replace all uses of this class before publishing your app.
+ * Created by vasilkoff on 13/02/2017.
  */
-public class DummyContent {
+public class DishContent {
 
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<DishItem> ITEMS = new ArrayList<DishItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, DishItem> ITEM_MAP = new HashMap<String, DishItem>();
 
     private static final int COUNT = 25;
 
@@ -32,13 +29,13 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(DishItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static DishItem createDummyItem(int position) {
+        return new DishItem(String.valueOf(position), "Item " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
@@ -53,12 +50,12 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    public static class DishItem {
         public final String id;
         public final String content;
         public final String details;
 
-        public DummyItem(String id, String content, String details) {
+        public DishItem(String id, String content, String details) {
             this.id = id;
             this.content = content;
             this.details = details;
