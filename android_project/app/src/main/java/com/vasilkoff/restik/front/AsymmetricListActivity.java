@@ -38,9 +38,10 @@ import java.util.List;
 
 public class AsymmetricListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private final String TAG = this.getClass().getSimpleName();
+    private final Context context = this;
+
     protected AsymmetricGridView listView;
     protected AsymmetricListAdapter adapter;
-    private final Context context = this;
     private List<TileItem> tilesList = new ArrayList<>(20);
 
 

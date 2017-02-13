@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -115,7 +116,6 @@ public class CategoryItemListActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -140,12 +140,13 @@ public class CategoryItemListActivity extends AppCompatActivity {
             holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).content);
 
+            final String arg = CategoryId+"/list/"+position;
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(CategoryItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putString(CategoryItemDetailFragment.ARG_ITEM_ID, arg);
                         CategoryItemDetailFragment fragment = new CategoryItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -154,7 +155,7 @@ public class CategoryItemListActivity extends AppCompatActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, CategoryItemDetailActivity.class);
-                        intent.putExtra(CategoryItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        intent.putExtra(CategoryItemDetailFragment.ARG_ITEM_ID, arg);
 
                         context.startActivity(intent);
                     }

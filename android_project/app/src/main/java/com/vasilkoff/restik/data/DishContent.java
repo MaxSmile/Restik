@@ -10,29 +10,9 @@ import java.util.Map;
  */
 public class DishContent {
 
-    /**
-     * An array of sample (dummy) items.
-     */
-    public static final List<DishItem> ITEMS = new ArrayList<DishItem>();
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<String, DishItem> ITEM_MAP = new HashMap<String, DishItem>();
 
-    private static final int COUNT = 25;
 
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
-    }
-
-    private static void addItem(DishItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
-    }
 
     private static DishItem createDummyItem(int position) {
         return new DishItem(String.valueOf(position), "Item " + position, makeDetails(position));
